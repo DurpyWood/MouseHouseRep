@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 
 public class FoodDetection : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FoodDetection : MonoBehaviour
     public Rigidbody rig;
     public bool PickedUp = false;
     public AudioSource audiosource;
+    public TextMeshProUGUI interactText; // interact [E]
 
     void Start()
     {
@@ -22,7 +24,8 @@ public class FoodDetection : MonoBehaviour
         // Check if the object is on the interactable layer
         if (((1 << other.gameObject.layer) & interactableLayer) != 0 & PickedUp != true)
         {
-            currentObject = other.gameObject;    
+            currentObject = other.gameObject;  
+            interactText.enabled = true;  
         }
     }
     void OnTriggerExit(Collider other)
@@ -31,6 +34,7 @@ public class FoodDetection : MonoBehaviour
         if (currentObject == other.gameObject & PickedUp != true)
         {
             currentObject = null;
+            interactText.enabled = false;
         }
     }
 
@@ -40,6 +44,7 @@ public class FoodDetection : MonoBehaviour
         {
             //audiosource.Play();
             PickedUp = true;
+            interactText.enabled = false;
             rig = currentObject.GetComponent<Rigidbody>();
             currentObject.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y + 1, Player.transform.position.z);
             currentObject.transform.SetParent(Player.transform);
@@ -52,8 +57,8 @@ public class FoodDetection : MonoBehaviour
             currentObject.GetComponent<Rigidbody>().useGravity = true;
             rig.constraints = RigidbodyConstraints.None;
             currentObject.transform.parent = null;
-            rig.AddForce(transform.up * 300f);
-            rig.AddForce(transform.forward * 50f);
+            rig.AddForce(transform.up * 200f);
+            rig.AddForce(transform.forward * 250f);
             PickedUp = false;
             currentObject = null;
 

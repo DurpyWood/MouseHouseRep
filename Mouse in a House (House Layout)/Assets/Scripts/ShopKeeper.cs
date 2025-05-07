@@ -18,6 +18,7 @@ public class ShopKeeper : MonoBehaviour
     public Transform shopkeeper; // the shopkeepers cords
     public  TextMeshProUGUI dialogeText1; //what he will say
     public TextMeshProUGUI dialogeText2; //the next line I want him to say
+    public TextMeshProUGUI interactText; // interact [E]
     public RawImage backround; // the paper backround for the text
     private int HowMuchSaid = 0; //tracks which dialoge we are on
     private int waitTime = 0; // makes I so you don't click once and do the intier coversation
@@ -28,6 +29,12 @@ public class ShopKeeper : MonoBehaviour
         if(inRange)
         {
             waitTime++;
+            interactText.enabled = true;
+        }
+        if(!inRange && waitTime > 0)
+        {
+            interactText.enabled = false;
+            waitTime = 0;
         }
         if (inRange && Input.GetKeyDown(KeyCode.E) && HowMuchSaid == 0) // if you are in range of the shop keeper
         {
@@ -41,7 +48,6 @@ public class ShopKeeper : MonoBehaviour
             HowMuchSaid++;
         }    
         if(HowMuchSaid == 1 && Input.GetKeyDown(KeyCode.E)){
-            Debug.Log("text1");
             dialogeText1.enabled = true;
             backround.enabled = true;
             HowMuchSaid++;
@@ -49,7 +55,6 @@ public class ShopKeeper : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.E) && HowMuchSaid == 2 && waitTime > 5)
         {
-            Debug.Log("text2");
             dialogeText1.enabled = false; //disables the first text box
             dialogeText2.enabled = true; //shows what is said next
             HowMuchSaid++;
@@ -57,7 +62,6 @@ public class ShopKeeper : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E) && HowMuchSaid == 3 && waitTime > 5)
         {
-            Debug.Log("text3");
             backround.enabled = false; //disables the text box
             dialogeText2.enabled = false; //disables the second text
             HowMuchSaid++;
@@ -65,7 +69,6 @@ public class ShopKeeper : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E) && HowMuchSaid == 4 && waitTime > 5)
         {
-            Debug.Log("text4");
             nextcamera.GetComponent<Camera>().enabled = false; // Turns on the shopkeeper camera
             playerCam.GetComponent<Camera>().enabled = true; //Turns off the camera connected to the player
             player.GetComponent<PlayerMovement>().enabled = true; //turns off the players movement

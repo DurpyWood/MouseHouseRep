@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
+using UnityEngine.UI;
 public class SceneMove2EB : MonoBehaviour
 {
     public bool inRange; //if you are in range to interact with the tunnle
@@ -17,13 +18,31 @@ public class SceneMove2EB : MonoBehaviour
     public int temppoints = 0; //amount of points given
     public TMPro.TextMeshProUGUI displayText;
     public TMPro.TextMeshProUGUI HDT;
+    public TextMeshProUGUI interactUI; // interact [E]
+    private bool wasON = false;
 
     // Update is called once per frame
     void Update()
     {
         inRange = Physics.CheckSphere(playerCheck.position, playerRadius, playerMask);
+        if(inRange && foodDetect.PickedUp == true) // when you arive with food
+        {
+            interactUI.enabled = true;
+            wasON = true;
+        }
+        if(inRange && winning == true && foodDetect.PickedUp == false)
+        {
+            interactUI.enabled = true;
+            wasON = true;
+        }
+        if(!inRange && wasON == true){ //When you leave after text turned on
+            interactUI.enabled = false;
+            wasON = false;
+        }
+        
         if(inRange && Input.GetKeyDown(KeyCode.E) && foodDetect.PickedUp != false) //if you hold a food
         {
+            interactUI.enabled = false;
             foodList.Add(foodDetect.currentObject.name); // Adds the food to the list
             if (foodDetect.currentObject.name == "Cookie")
             {
