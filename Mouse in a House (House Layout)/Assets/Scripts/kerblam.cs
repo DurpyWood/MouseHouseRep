@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class kerblam : MonoBehaviour
 {
+    public string LevelName;
+
     void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("Hideout");
+        SceneManager.LoadScene(LevelName);
     }
 }
