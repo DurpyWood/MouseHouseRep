@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: dce0a84e23abc304f8567801c05f1ee0
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 07e1e0db229262141add4fba5d7e26e7
+  - enabled: 1
     path: Assets/Scenes/Hideout.unity
     guid: 2e70547fc60c3fa458573d7f9a951dc3
   - enabled: 1

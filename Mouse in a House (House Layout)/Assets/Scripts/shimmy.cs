@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class shimmy : MonoBehaviour
 {
+    public string LevelName;
     public void LoadLevel()
     {
-        SceneManager.LoadScene("Hideout");
+        SceneManager.LoadScene(LevelName);
     }
 }

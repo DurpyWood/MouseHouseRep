@@ -12,9 +12,20 @@ public class Pistons : MonoBehaviour
     private float hasBeen = 0;
     private bool pushed = false;
     public int howLong = 0;
+    public bool lastOne = false;
+    public static bool allDone = false;
+    public static int allReady = 0;
+    public static int allReadyOut = 0;
+    private bool stillMoving = false;
+    public GameObject refrancePoint;
+    public GameObject outreferancePoint;
+    private float refarnce;
+    private float outReferance;
     void Start()
     {
         startTime = Time.time;
+        refarnce = refrancePoint.transform.position.z;
+        outReferance = outreferancePoint.transform.position.z;
     }
 
     // Update is called once per frame
@@ -23,28 +34,48 @@ public class Pistons : MonoBehaviour
         if(hasBeen < wait)
         {
             hasBeen = Time.time - startTime;
+            allReady = 0;
         }
         else
         {
             if (!pushed)
             {
+                
+                stillMoving = true;
                 transform.Translate(Vector3.up * speedOut * Time.deltaTime);
-                howLong++;
-                if(howLong > 60)
+                if(outReferance >= transform.position.z)
                 {
                     pushed = true;
-                    howLong = 0;
+                    allReady = 0;  
+                    allDone = false;           
                 }
             }
             else if(pushed)
             {
-                transform.Translate(Vector3.up * -speedIn * Time.deltaTime);
-                howLong++;
-                if(howLong > 120)
+                if(allDone)
                 {
-                    pushed = false;
-                    howLong = 0;
+                    if(stillMoving)
+                    {
+                        transform.Translate(Vector3.up * -speedIn * Time.deltaTime);
+                    }
+                    
+                    if(transform.position.z >= refarnce && stillMoving == true)
+                    {
+                        allReady++;
+                        stillMoving = false;
+                    }
+                    if(allReady == 6)
+                    {
+                        pushed = false;
+                        startTime = Time.time;
+                        hasBeen = startTime - Time.time;
+                    }
                 }
+                else if(lastOne)
+                {
+                    allDone = true;
+                }
+                
             }
         }
     }
