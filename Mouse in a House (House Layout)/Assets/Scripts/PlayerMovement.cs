@@ -10,15 +10,15 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isGrounded = true;
 
-    public float speed;
-    public float runSpeed;
-    public float walkSpeed;
-    public float gravity = -9.81f;
+    public float speed = 3;
+    public float runSpeed = 5.25f;
+    public float walkSpeed = 3;
+    public float gravity = -12.5f;
     public float turnSmoothing = 0.1f;
-    public float jumpPower;
-    public float stamina;
-    public float stambam;
-    public int stammax;
+    public float jumpPower = 1;
+    public float stamina = 0;
+    public float stambam = 1;
+    public int stammax = 5;
     public bool canSprint = true;
     public bool isSprinting;
     float turnSmoothVelocity;
