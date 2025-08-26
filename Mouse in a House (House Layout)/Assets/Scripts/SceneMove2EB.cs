@@ -14,7 +14,7 @@ public class SceneMove2EB : MonoBehaviour
     public string LevelName; // Name of level you want to travle to
     public FoodDetection foodDetect; //Food detection script
     public List<string> foodList = new List<string>(10); //what food you have stored
-    public int points = 0; //amount of points given
+    public int points = 0; //amount of total points
     public int temppoints = 0; //amount of points given
     public TMPro.TextMeshProUGUI displayText;
     public TMPro.TextMeshProUGUI HDT;
