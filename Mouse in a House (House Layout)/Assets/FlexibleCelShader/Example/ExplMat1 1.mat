@@ -93,7 +93,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineSize: 20.98
+    - _OutlineSize: 13
     - _Parallax: 0.02
     - _RampLevels: 4
     - _RimAlpha: 0.76
