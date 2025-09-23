@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class FoodSFX : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] AudioSource audioSource;
+    public AudioClip audioClip;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        audioSource.PlayOneShot(audioClip);
     }
 }
