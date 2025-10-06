@@ -19,7 +19,8 @@ public class PATHFINDINGYEAH : MonoBehaviour
     public float normalSpeed;
     public FieldOfView script;
     public Vector3 memory;
-
+    [SerializeField] AudioSource audioSource;
+    public float startingPitch = 1f;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class PATHFINDINGYEAH : MonoBehaviour
         anger = 0.05f;
         delay = Random.Range(1, 5);
         normalSpeed = 4.5f;
+        audioSource.pitch = startingPitch;
     }
 
     void FindNode()
@@ -53,24 +55,26 @@ public class PATHFINDINGYEAH : MonoBehaviour
             {
                 FindNode();
                 timer = 0;
-                delay = Random.Range(1, 5);
+                delay = Random.Range(1, 3);
                 navMeshAgent.speed += anger;
                 normalSpeed = navMeshAgent.speed;
                 chaseSpeed = navMeshAgent.speed * 1.5f;
             }
         }
         target = selectedNode;
-        if (script.canSeePlayer==true)
+        if (script.canSeePlayer == true)
         {
             target = Mouse;
             navMeshAgent.speed = chaseSpeed;
             memory = Mouse.transform.position;
+            audioSource.pitch = startingPitch * 1.5f;
         }
         else
         {
             navMeshAgent.SetDestination(memory);
             StartCoroutine(TIME());
             navMeshAgent.speed = normalSpeed;
+            audioSource.pitch = startingPitch;
         }
         if (target)
         {
