@@ -79,6 +79,7 @@ public class PATHFINDINGYEAH : MonoBehaviour
         if (target)
         {
             navMeshAgent.SetDestination(target.transform.position);
+            //transform.eulerAngles = new Vector3(-90, 0, transform.rotation.z);
         }
         if (distance <= 1.75)
         {
